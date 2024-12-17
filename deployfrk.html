@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <title>Railway Deployment</title>
+	<link rel="canonical" href="https://toxic-pair-code.onrender.com" />
+  <link rel="stylesheet" href="./css/delpoy.css">
+  <link rel="stylesheet" href="ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="shortcut icon" href="RFGPMey.jpg" type="image/x-icon">
+</head>
+<style>
+  body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+  background-color: #000;
+  color: #fff;
+}
+.container {
+  text-align: center;
+  background-color: #333;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.icon {
+  font-size: 2em;
+  margin-bottom: 2px;
+}
+.input {
+  width: calc(100% - 20px);
+  padding: 10px;
+  font-size: 17px;
+  color: #fff;
+  border: none;
+  border-radius: .5em;
+  margin-top: 10px;
+  background-color: #444;
+}
+.button {
+  width: 100%;
+  border: none;
+  background-color: #1363DF;
+  text-decoration: none;
+  padding: 15px;
+  padding-bottom: 17px;
+  font-size: 17px;
+  color: #fff;
+  border-radius: .5em;
+  cursor: pointer;
+  margin-top: 10px;
+}
+form {
+  display: flex;
+  flex-direction: column;
+}
+.icon-blue {
+  color: #1363DF;
+}
+.alert {
+  font-weight: bold;
+  background-color: black;
+  color: white;
+  padding: 10px;
+  border-radius: 5px;
+}
+</style>
+<body>
+  <div class="container">
+    <div class="icon"><i class="fas fa-user icon-blue"></i></div>
+    <h2>Welcome User</h2>
+    <form onsubmit="return deployToHeroku();">
+      <input placeholder="Enter Your GitHub Username" class="input" id="githubUsername" type="text">
+      <button class="button" type="submit">Deploy to Railway</button>
+    </form>
+  </div>
+  <script>
+    window.onload = function() {
+  if (!localStorage.getItem('visitedBefore')) {
+    alert("After forking Toxic-MD you can use this web page");
+    localStorage.setItem('visitedBefore', 'true');
+  }
+};
+async function doesGitHubRepoExist(owner, repo) {
+  if (owner === 'xhclinton') {
+    return false;
+  }
+  const apiUrl = `https://api.github.com/repos/${owner}/${repo}`;
+  try {
+    const response = await fetch(apiUrl);
+    if (response.status === 200) {
+      return true;
+    } else if (response.status === 404) {
+      return false;
+    } else {
+      throw new Error(`Unexpected response: ${response.status}`);
+    }
+  } catch (error) {
+    console.error(`Error checking GitHub repository: ${error.message}`);
+    return false;
+  }
+}
+function deployToHeroku() {
+  var usernameInput = document.getElementById("githubUsername");
+  var username = usernameInput.value.trim().replace(/\s+/g, ''); // Remove leading/trailing spaces and internal spaces
+  var repoName = 'Toxic-MD';
+  doesGitHubRepoExist(username, repoName).then((exists) => {
+    if (exists) {
+      var herokuURL = `https://railway.app/template/gDYcSS?referralCode=wgSM5y`;
+    } else {
+      console.log('Repository does not exist or error occurred.');
+    }
+  });
+  return false;
+}
+  </script>
+<center><font size="2">This is the free demo result. For a full version of this website, please go to  <a href="https://www6.waybackmachinedownloader.com/website-downloader-online/scrape-all-files/">Website Downloader</a></font></center></body>
+</html>
